@@ -9,8 +9,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Amiri&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
-
 <style>
 
 body{
@@ -19,6 +17,32 @@ font-family:'Cinzel', serif;
 text-align:center;
 background:#f7f3ec url("https://www.transparenttextures.com/patterns/arabesque.png");
 color:#4a3a2c;
+}
+
+/* CURTAIN */
+
+#curtain{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:9999;
+display:flex;
+}
+
+.curtain{
+width:50%;
+background:#8b6b3d;
+transition:2s;
+}
+
+#curtain.open .left{
+transform:translateX(-100%);
+}
+
+#curtain.open .right{
+transform:translateX(100%);
 }
 
 /* ENVELOPE */
@@ -36,20 +60,20 @@ height:200px;
 background:#c9a96e;
 position:relative;
 cursor:pointer;
-perspective:1000px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
-.top-flap{
+.flap{
 position:absolute;
 width:100%;
 height:100%;
 background:#b8955f;
+clip-path:polygon(0 0,100% 0,50% 60%);
 transform-origin:top;
 transition:1s;
-clip-path:polygon(0 0,100% 0,50% 60%);
 }
 
-.envelope.open .top-flap{
+.envelope.open .flap{
 transform:rotateX(-180deg);
 }
 
@@ -57,48 +81,7 @@ transform:rotateX(-180deg);
 position:absolute;
 top:40px;
 width:100%;
-}
-
-.arabic{
-font-family:'Amiri', serif;
-font-size:26px;
-}
-
-.hidden{
-display:none;
-}
-
-/* CURTAIN */
-
-#curtain{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:999;
-}
-
-.curtain-left,
-.curtain-right{
-position:absolute;
-width:50%;
-height:100%;
-background:#8b6b3d;
-transition:2s;
-}
-
-.curtain-right{
-right:0;
-}
-
-.curtain-open .curtain-left{
-transform:translateX(-100%);
-}
-
-.curtain-open .curtain-right{
-transform:translateX(100%);
+color:white;
 }
 
 /* HEADER */
@@ -110,11 +93,7 @@ color:#8b6b3d;
 margin-top:40px;
 }
 
-.subtitle{
-font-size:18px;
-}
-
-/* SECTIONS */
+/* SECTION */
 
 section{
 padding:60px 20px;
@@ -124,7 +103,7 @@ margin:auto;
 
 /* CIRCLES */
 
-.circle-info{
+.circle-container{
 display:flex;
 justify-content:center;
 gap:30px;
@@ -141,33 +120,30 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 background:#fffaf2;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
 /* COUNTDOWN */
 
-.countdown{
-font-size:32px;
+#countdown{
+font-size:28px;
 color:#8b6b3d;
-margin-top:20px;
 }
 
 /* SCRATCH */
 
 #scratch{
 border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
 cursor:pointer;
 }
 
-/* GIFT NOTE */
+/* CALLIGRAPHY */
 
-.gift-note{
-font-style:italic;
-border-top:1px solid #d6c4a2;
-border-bottom:1px solid #d6c4a2;
-padding:20px;
-margin:40px auto;
-max-width:500px;
+.calligraphy{
+font-family:'Amiri', serif;
+font-size:36px;
+line-height:1.7;
+color:#8b6b3d;
 }
 
 /* BUTTON */
@@ -182,17 +158,23 @@ cursor:pointer;
 margin-top:20px;
 }
 
+.hidden{
+display:none;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<!-- CURTAIN -->
+<!-- CURTAINS -->
 
 <div id="curtain">
-<div class="curtain-left"></div>
-<div class="curtain-right"></div>
+
+<div class="curtain left"></div>
+<div class="curtain right"></div>
+
 </div>
 
 <!-- ENVELOPE -->
@@ -201,13 +183,11 @@ margin-top:20px;
 
 <div class="envelope" onclick="openInvite()">
 
-<div class="top-flap"></div>
+<div class="flap"></div>
 
 <div class="letter">
 
-<h2 class="arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</h2>
-
-<p>Tap to Open Invitation</p>
+<h3>Tap to Open Invitation</h3>
 
 </div>
 
@@ -219,94 +199,123 @@ margin-top:20px;
 
 <div id="main-site" class="hidden">
 
-<header>
-
 <h1 class="title">Inam Wedding</h1>
 
-<p class="subtitle">A Celebration of Love & Nikah</p>
-
-</header>
-
-
-<section data-aos="fade-up">
+<section>
 
 <h2>Inam & Ayesha</h2>
 
-<p>
-With the blessings of Allah (SWT),  
-we joyfully invite you to celebrate the sacred Nikah ceremony.
-</p>
+<p>With the blessings of Allah (SWT) we invite you to our Nikah ceremony.</p>
 
 </section>
 
 
-<section class="circle-info" data-aos="fade-up">
+<!-- CALLIGRAPHY -->
 
-<div class="circle">
-<h3>Date</h3>
-<p>15 Dec 2026</p>
+<section>
+
+<div class="calligraphy">
+
+وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا  
+لِّتَسْكُنُوا إِلَيْهَا  
+
 </div>
 
-<div class="circle">
-<h3>Time</h3>
-<p>7:00 PM</p>
-</div>
-
-<div class="circle">
-<h3>Venue</h3>
-<p>Dubai Grand Hall</p>
-</div>
+<p>"And among His signs is that He created for you spouses."</p>
 
 </section>
 
 
-<section data-aos="fade-up">
+<!-- PARENTS -->
 
-<h2>Wedding Countdown</h2>
-
-<div id="countdown" class="countdown"></div>
-
-</section>
-
-
-<section data-aos="fade-up">
+<section>
 
 <h2>With Blessings Of</h2>
 
 <p>
-Mr & Mrs Hussain<br>
-and<br>
-Mr & Mrs Ahmed
+
+Mr & Mrs Hussain (Parents of Groom)<br><br>
+
+Mr & Mrs Ahmed (Parents of Bride)
+
 </p>
 
 </section>
 
 
-<section data-aos="fade-up">
+<!-- SCRATCH DATE -->
 
-<h2>Scratch To Reveal</h2>
+<section>
+
+<h2>Scratch to Reveal Wedding Date</h2>
 
 <canvas id="scratch" width="300" height="120"></canvas>
 
-<p id="scratch-text" class="hidden">
-We kindly request no boxed gifts.  
-Your presence and duas are the greatest gift.
+<p id="dateReveal" class="hidden">
+
+📅 15 December 2026
+
 </p>
 
 </section>
 
 
-<section class="gift-note" data-aos="fade-up">
+<!-- EVENT DETAILS -->
+
+<section>
+
+<div class="circle-container">
+
+<div class="circle">
+
+<h3>Date</h3>
+<p>15 Dec 2026</p>
+
+</div>
+
+<div class="circle">
+
+<h3>Time</h3>
+<p>7:00 PM</p>
+
+</div>
+
+<div class="circle">
+
+<h3>Venue</h3>
+<p>Dubai Grand Hall</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- COUNTDOWN -->
+
+<section>
+
+<h2>Wedding Countdown</h2>
+
+<div id="countdown"></div>
+
+</section>
+
+
+<section>
 
 <p>
-Your presence at our Nikah is the greatest blessing.  
-We humbly request no boxed gifts.
+
+Your presence is the greatest gift to us.  
+We kindly request no boxed gifts.
+
 </p>
 
 </section>
 
 
-<section data-aos="fade-up">
+<section>
 
 <button onclick="openMap()">View Location</button>
 
@@ -314,23 +323,12 @@ We humbly request no boxed gifts.
 
 </section>
 
-
-<footer>
-
-<p>We look forward to celebrating with you.</p>
-
-<p>With Love & Duas</p>
-
-</footer>
-
 </div>
 
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
 <script>
 
-AOS.init();
+/* ENVELOPE */
 
 function openInvite(){
 
@@ -342,13 +340,14 @@ document.getElementById("envelope-screen").style.display="none";
 
 document.getElementById("main-site").classList.remove("hidden");
 
-document.getElementById("curtain").classList.add("curtain-open");
+document.getElementById("curtain").classList.add("open");
 
 launchConfetti();
 
-},900);
+},800)
 
 }
+
 
 /* COUNTDOWN */
 
@@ -361,7 +360,9 @@ let now = new Date().getTime();
 let distance = weddingDate - now;
 
 let days = Math.floor(distance/(1000*60*60*24));
+
 let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
 let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
 
 document.getElementById("countdown").innerHTML =
@@ -373,13 +374,18 @@ days+" Days "+hours+" Hours "+minutes+" Minutes";
 /* MAP */
 
 function openMap(){
+
 window.open("https://maps.google.com/?q=Dubai Grand Hall");
+
 }
+
 
 /* RSVP */
 
 function rsvp(){
-window.open("https://wa.me/971000000000?text=I will attend the wedding InshaAllah");
+
+window.open("https://wa.me/971000000000?text=I will attend InshaAllah");
+
 }
 
 
@@ -392,12 +398,16 @@ for(let i=0;i<120;i++){
 let conf=document.createElement("div");
 
 conf.style.position="fixed";
+
 conf.style.width="6px";
+
 conf.style.height="6px";
+
 conf.style.background="#c9a96e";
+
 conf.style.left=Math.random()*100+"%";
+
 conf.style.top="-10px";
-conf.style.opacity=Math.random();
 
 document.body.appendChild(conf);
 
@@ -424,6 +434,7 @@ if(canvas){
 const ctx=canvas.getContext("2d");
 
 ctx.fillStyle="#c9a96e";
+
 ctx.fillRect(0,0,canvas.width,canvas.height);
 
 canvas.addEventListener("mousemove",function(e){
@@ -431,10 +442,12 @@ canvas.addEventListener("mousemove",function(e){
 ctx.globalCompositeOperation="destination-out";
 
 ctx.beginPath();
+
 ctx.arc(e.offsetX,e.offsetY,15,0,Math.PI*2);
+
 ctx.fill();
 
-document.getElementById("scratch-text").classList.remove("hidden");
+document.getElementById("dateReveal").classList.remove("hidden");
 
 });
 
