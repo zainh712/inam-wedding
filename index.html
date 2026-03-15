@@ -7,30 +7,207 @@
 
 <title>Inam Wedding Invitation</title>
 
-<link rel="stylesheet" href="style.css">
-
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Amiri&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+
+<style>
+
+body{
+margin:0;
+font-family:'Cinzel', serif;
+text-align:center;
+background:#f7f3ec url("https://www.transparenttextures.com/patterns/arabesque.png");
+color:#4a3a2c;
+}
+
+/* ENVELOPE */
+
+#envelope-screen{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.envelope{
+width:320px;
+height:200px;
+background:#c9a96e;
+position:relative;
+cursor:pointer;
+perspective:1000px;
+}
+
+.top-flap{
+position:absolute;
+width:100%;
+height:100%;
+background:#b8955f;
+transform-origin:top;
+transition:1s;
+clip-path:polygon(0 0,100% 0,50% 60%);
+}
+
+.envelope.open .top-flap{
+transform:rotateX(-180deg);
+}
+
+.letter{
+position:absolute;
+top:40px;
+width:100%;
+}
+
+.arabic{
+font-family:'Amiri', serif;
+font-size:26px;
+}
+
+.hidden{
+display:none;
+}
+
+/* CURTAIN */
+
+#curtain{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:999;
+}
+
+.curtain-left,
+.curtain-right{
+position:absolute;
+width:50%;
+height:100%;
+background:#8b6b3d;
+transition:2s;
+}
+
+.curtain-right{
+right:0;
+}
+
+.curtain-open .curtain-left{
+transform:translateX(-100%);
+}
+
+.curtain-open .curtain-right{
+transform:translateX(100%);
+}
+
+/* HEADER */
+
+.title{
+font-family:'Great Vibes', cursive;
+font-size:60px;
+color:#8b6b3d;
+margin-top:40px;
+}
+
+.subtitle{
+font-size:18px;
+}
+
+/* SECTIONS */
+
+section{
+padding:60px 20px;
+max-width:800px;
+margin:auto;
+}
+
+/* CIRCLES */
+
+.circle-info{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.circle{
+width:160px;
+height:160px;
+border-radius:50%;
+border:3px solid #c9a96e;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:#fffaf2;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* COUNTDOWN */
+
+.countdown{
+font-size:32px;
+color:#8b6b3d;
+margin-top:20px;
+}
+
+/* SCRATCH */
+
+#scratch{
+border-radius:10px;
+cursor:pointer;
+}
+
+/* GIFT NOTE */
+
+.gift-note{
+font-style:italic;
+border-top:1px solid #d6c4a2;
+border-bottom:1px solid #d6c4a2;
+padding:20px;
+margin:40px auto;
+max-width:500px;
+}
+
+/* BUTTON */
+
+button{
+padding:12px 25px;
+border:none;
+background:#8b6b3d;
+color:white;
+border-radius:25px;
+cursor:pointer;
+margin-top:20px;
+}
+
+</style>
 
 </head>
 
 <body>
 
-<!-- Envelope Opening Screen -->
+<!-- CURTAIN -->
+
+<div id="curtain">
+<div class="curtain-left"></div>
+<div class="curtain-right"></div>
+</div>
+
+<!-- ENVELOPE -->
 
 <div id="envelope-screen">
 
-<div class="envelope">
+<div class="envelope" onclick="openInvite()">
 
-<div class="flap"></div>
+<div class="top-flap"></div>
 
 <div class="letter">
 
 <h2 class="arabic">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</h2>
 
-<p>You are warmly invited</p>
-
-<button onclick="openInvite()">Open Invitation</button>
+<p>Tap to Open Invitation</p>
 
 </div>
 
@@ -38,8 +215,7 @@
 
 </div>
 
-
-<!-- Main Website -->
+<!-- MAIN SITE -->
 
 <div id="main-site" class="hidden">
 
@@ -52,7 +228,7 @@
 </header>
 
 
-<section class="couple">
+<section data-aos="fade-up">
 
 <h2>Inam & Ayesha</h2>
 
@@ -64,58 +240,77 @@ we joyfully invite you to celebrate the sacred Nikah ceremony.
 </section>
 
 
-<section class="calligraphy">
+<section class="circle-info" data-aos="fade-up">
 
-<h2 class="arabic-large">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا</h2>
+<div class="circle">
+<h3>Date</h3>
+<p>15 Dec 2026</p>
+</div>
 
-<p>
-"And among His signs is that He created for you spouses from among yourselves."
-</p>
+<div class="circle">
+<h3>Time</h3>
+<p>7:00 PM</p>
+</div>
+
+<div class="circle">
+<h3>Venue</h3>
+<p>Dubai Grand Hall</p>
+</div>
 
 </section>
 
 
-<section class="countdown-section">
+<section data-aos="fade-up">
 
 <h2>Wedding Countdown</h2>
 
-<div id="countdown"></div>
+<div id="countdown" class="countdown"></div>
 
 </section>
 
 
-<section class="details">
+<section data-aos="fade-up">
 
-<h2>Event Details</h2>
-
-<p>📅 Date: 15 December 2026</p>
-
-<p>🕐 Time: 7:00 PM</p>
-
-<p>📍 Venue: Dubai Grand Hall</p>
-
-<button onclick="openMap()">View Location</button>
-
-</section>
-
-
-<section class="invite-message">
-
-<h2>A Special Message</h2>
+<h2>With Blessings Of</h2>
 
 <p>
-Your presence will add joy and blessings to our special day.  
-Please join us in celebrating love, family, and togetherness.
+Mr & Mrs Hussain<br>
+and<br>
+Mr & Mrs Ahmed
 </p>
 
 </section>
 
 
-<section class="rsvp">
+<section data-aos="fade-up">
 
-<h2>RSVP</h2>
+<h2>Scratch To Reveal</h2>
 
-<button onclick="rsvp()">Confirm on WhatsApp</button>
+<canvas id="scratch" width="300" height="120"></canvas>
+
+<p id="scratch-text" class="hidden">
+We kindly request no boxed gifts.  
+Your presence and duas are the greatest gift.
+</p>
+
+</section>
+
+
+<section class="gift-note" data-aos="fade-up">
+
+<p>
+Your presence at our Nikah is the greatest blessing.  
+We humbly request no boxed gifts.
+</p>
+
+</section>
+
+
+<section data-aos="fade-up">
+
+<button onclick="openMap()">View Location</button>
+
+<button onclick="rsvp()">RSVP on WhatsApp</button>
 
 </section>
 
@@ -130,7 +325,122 @@ Please join us in celebrating love, family, and togetherness.
 
 </div>
 
-<script src="script.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+
+AOS.init();
+
+function openInvite(){
+
+document.querySelector(".envelope").classList.add("open");
+
+setTimeout(()=>{
+
+document.getElementById("envelope-screen").style.display="none";
+
+document.getElementById("main-site").classList.remove("hidden");
+
+document.getElementById("curtain").classList.add("curtain-open");
+
+launchConfetti();
+
+},900);
+
+}
+
+/* COUNTDOWN */
+
+const weddingDate = new Date("Dec 15, 2026 19:00:00").getTime();
+
+setInterval(function(){
+
+let now = new Date().getTime();
+
+let distance = weddingDate - now;
+
+let days = Math.floor(distance/(1000*60*60*24));
+let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+
+document.getElementById("countdown").innerHTML =
+days+" Days "+hours+" Hours "+minutes+" Minutes";
+
+},1000);
+
+
+/* MAP */
+
+function openMap(){
+window.open("https://maps.google.com/?q=Dubai Grand Hall");
+}
+
+/* RSVP */
+
+function rsvp(){
+window.open("https://wa.me/971000000000?text=I will attend the wedding InshaAllah");
+}
+
+
+/* CONFETTI */
+
+function launchConfetti(){
+
+for(let i=0;i<120;i++){
+
+let conf=document.createElement("div");
+
+conf.style.position="fixed";
+conf.style.width="6px";
+conf.style.height="6px";
+conf.style.background="#c9a96e";
+conf.style.left=Math.random()*100+"%";
+conf.style.top="-10px";
+conf.style.opacity=Math.random();
+
+document.body.appendChild(conf);
+
+let fall=setInterval(()=>{
+conf.style.top=parseInt(conf.style.top)+5+"px";
+},30);
+
+setTimeout(()=>{
+clearInterval(fall);
+conf.remove();
+},3000);
+
+}
+
+}
+
+
+/* SCRATCH */
+
+const canvas=document.getElementById("scratch");
+
+if(canvas){
+
+const ctx=canvas.getContext("2d");
+
+ctx.fillStyle="#c9a96e";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+canvas.addEventListener("mousemove",function(e){
+
+ctx.globalCompositeOperation="destination-out";
+
+ctx.beginPath();
+ctx.arc(e.offsetX,e.offsetY,15,0,Math.PI*2);
+ctx.fill();
+
+document.getElementById("scratch-text").classList.remove("hidden");
+
+});
+
+}
+
+</script>
 
 </body>
 </html>
